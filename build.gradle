@@ -45,7 +45,6 @@ compileJava {
 }
 
 dependencies {
-    compile 'com.google.code.gson:gson:2.2.4'
     compile 'edu.wpi.first:ToolchainPlugin:2019.1.1-beta-4a'
 
     testCompile('org.spockframework:spock-core:1.2-groovy-2.5') {
