@@ -1,7 +1,16 @@
 package thad.gradle.ev3;
 
 import org.gradle.api.Project;
+import org.gradle.api.Task;
+import org.gradle.api.plugins.ExtensionContainer;
+import org.gradle.model.ModelMap;
+import org.gradle.model.RuleSource;
+import org.gradle.nativeplatform.NativeBinarySpec;
+import org.gradle.platform.base.BinaryTasks;
 
+
+import jaci.gradle.deploy.DeployExtension;
+import jaci.gradle.deploy.artifact.ArtifactsExtension;
 import jaci.gradle.deploy.target.RemoteTarget;
 import jaci.gradle.deploy.target.location.SshDeployLocation;
 
@@ -36,5 +45,6 @@ public class Ev3 extends RemoteTarget {
   public String toString() {
       return "RoboRIO[" + this.getName()  + "]";
   }
+
 
 }

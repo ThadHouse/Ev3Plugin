@@ -44,7 +44,26 @@ compileJava {
     targetCompatibility = 1.8
 }
 
+compileGroovy {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+
+
+sourceSets {
+    main {
+        java {
+            srcDirs = [] // don't compile Java code twice
+        }
+        groovy {
+            srcDirs = [ 'src/main/groovy', 'src/main/java' ]
+        }
+    }
+}
+
 dependencies {
+    compile 'com.google.code.gson:gson:2.2.4'
     compile 'edu.wpi.first:ToolchainPlugin:2019.1.1-beta-4a'
 
     testCompile('org.spockframework:spock-core:1.2-groovy-2.5') {
