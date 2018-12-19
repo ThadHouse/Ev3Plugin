@@ -21,17 +21,7 @@ public class Ev3Rules extends RuleSource {
         return art.getComponent().equalsIgnoreCase(binary.getComponent().getName()) &&
         art.getTargetPlatform().equalsIgnoreCase(binary.getTargetPlatform().getName());
       }).all((art) -> {
-        art.set_bin(binary);
+        art._bin = binary;
       });
-
-      // deployExt.artifacts
-      //         .withType(FRCNativeArtifact)
-      //         .matching { FRCNativeArtifact art ->
-      //             art.component.equalsIgnoreCase(binary.component.name) &&
-      //             art.targetPlatform.equalsIgnoreCase(binary.targetPlatform.name)
-      //         }
-      //         .all { FRCNativeArtifact art ->
-      //             art._bin = binary
-      //         }
   }
 }

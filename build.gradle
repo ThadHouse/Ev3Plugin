@@ -1,7 +1,6 @@
 plugins {
     id 'java-gradle-plugin'
     id 'maven-publish'
-    id 'groovy'
     id "edu.wpi.first.wpilib.versioning.WPILibVersioningPlugin" version "2.2"
     id "com.gradle.plugin-publish" version "0.10.0"
 }
@@ -44,27 +43,9 @@ compileJava {
     targetCompatibility = 1.8
 }
 
-compileGroovy {
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
-}
-
-
-
-sourceSets {
-    main {
-        java {
-            srcDirs = [] // don't compile Java code twice
-        }
-        groovy {
-            srcDirs = [ 'src/main/groovy', 'src/main/java' ]
-        }
-    }
-}
-
 dependencies {
     compile 'com.google.code.gson:gson:2.2.4'
-    compile 'edu.wpi.first:ToolchainPlugin:2019.1.1-beta-4a'
+    compile 'edu.wpi.first:GradleRIO:2019.1.1-beta-4c'
 
     testCompile('org.spockframework:spock-core:1.2-groovy-2.5') {
         exclude group: 'org.codehaus.groovy'
