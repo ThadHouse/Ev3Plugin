@@ -1,11 +1,16 @@
 package thad.gradle.ev3;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.plugins.AppliedPlugin;
 import org.gradle.api.plugins.ExtensionAware;
 
 import edu.wpi.first.gradlerio.frc.DebugInfoTask;
+import groovy.lang.Closure;
 import jaci.gradle.deploy.DeployExtension;
 import jaci.gradle.deploy.artifact.Artifact;
 import jaci.gradle.deploy.artifact.ArtifactsExtension;
@@ -25,8 +30,20 @@ public class Ev3Plugin implements Plugin<Project> {
 
     project.getPluginManager().withPlugin("jaci.gradle.EmbeddedTools", (plugin) -> {
       project.getTasks().withType(DebugInfoTask.class, task -> {
+        System.out.println("Adding tasks");
         task.getExtraArtifacts().add(new DebugInfoClosureWrapper((art, cfg) -> {
-
+          if (art instanceof Ev3NativeArtifact) {
+            art.getTargets().all(o -> {
+              String target = (String)o;
+              Map<String, Object> items = new HashMap<>();
+              items.put("artifact", art.getName());
+              items.put("target", target);
+              items.put("component", ((Ev3NativeArtifact)art).getComponent());
+              items.put("debugfile", art.getName() + "_" + target + ".debugconfig");
+              items.put("language", "cpp");
+              cfg.add(items);
+            });
+          }
         }));
       });
 
