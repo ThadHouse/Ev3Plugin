@@ -23,7 +23,6 @@ import edu.wpi.first.toolchain.ToolchainExtension;
 import jaci.gradle.deploy.artifact.NativeArtifact;
 import jaci.gradle.deploy.context.DeployContext;
 import jaci.gradle.deploy.sessions.IPSessionController;
-import jaci.gradle.log.ETLogger;
 import jaci.gradle.nativedeps.DelegatedDependencySet;
 
 public class Ev3NativeArtifact extends NativeArtifact {
@@ -124,8 +123,7 @@ public class Ev3NativeArtifact extends NativeArtifact {
         if (getDebug()) {
             conffile.getParentFile().mkdirs();
 
-            ctx.getLogger().withLock(new EmptyClosureWrapper(() -> {
-                ETLogger logger = ctx.getLogger();
+            ctx.getLogger().withLock(new LoggerClosureWrapper((logger) -> {
                 logger.log("====================================================================");
                 logger.log("DEBUGGING ACTIVE ON PORT " + getDebugPort() + "!");
                 logger.log("Launch debugger with " + (isWin ? "" : "./") + Paths.get(getProject().getRootDir().toURI()).relativize(Paths.get(cmdfile.toURI())).toString());

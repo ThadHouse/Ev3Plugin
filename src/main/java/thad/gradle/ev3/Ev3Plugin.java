@@ -1,7 +1,6 @@
 package thad.gradle.ev3;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.gradle.api.Plugin;
@@ -10,7 +9,6 @@ import org.gradle.api.plugins.AppliedPlugin;
 import org.gradle.api.plugins.ExtensionAware;
 
 import edu.wpi.first.gradlerio.frc.DebugInfoTask;
-import groovy.lang.Closure;
 import jaci.gradle.deploy.DeployExtension;
 import jaci.gradle.deploy.artifact.Artifact;
 import jaci.gradle.deploy.artifact.ArtifactsExtension;
