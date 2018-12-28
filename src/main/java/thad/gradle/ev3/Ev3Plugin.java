@@ -17,12 +17,15 @@ import thad.gradle.ev3.toolchain.Ev3ToolchainPlugin;
 
 public class Ev3Plugin implements Plugin<Project> {
 
+  public static final String platform = "linuxev3";
+
   @Override
   public void apply(Project project) {
     project.getPluginManager().withPlugin("edu.wpi.first.Toolchain", (AppliedPlugin toolchain) -> {
       // Toolchain plugin has been applied
       project.getPluginManager().apply(Ev3ToolchainPlugin.class);
       project.getPluginManager().apply(Ev3Rules.class);
+      project.getPluginManager().apply(Ev3NativeCompileRules.class);
 
     });
 

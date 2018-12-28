@@ -16,6 +16,7 @@ import edu.wpi.first.toolchain.ToolchainDescriptor;
 import edu.wpi.first.toolchain.ToolchainExtension;
 import edu.wpi.first.toolchain.ToolchainPlugin;
 import edu.wpi.first.toolchain.ToolchainRegistrar;
+import thad.gradle.ev3.Ev3Plugin;
 
 public class Ev3ToolchainPlugin implements Plugin<Project> {
 
@@ -32,7 +33,7 @@ public class Ev3ToolchainPlugin implements Plugin<Project> {
 
     ToolchainDescriptor descriptor = new ToolchainDescriptor("ev3", "ev3Gcc", new ToolchainRegistrar<Ev3Gcc>(Ev3Gcc.class, project));
 
-    descriptor.setToolchainPlatforms("linuxev3");
+    descriptor.setToolchainPlatforms(Ev3Plugin.platform);
     descriptor.setOptional(false);
     descriptor.getDiscoverers().all((ToolchainDiscoverer disc) -> {
         disc.configureVersions(ev3Ext.versionLow, ev3Ext.versionHigh);

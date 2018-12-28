@@ -20,6 +20,7 @@ import org.gradle.nativeplatform.NativeDependencySet;
 
 import edu.wpi.first.toolchain.ToolchainDiscoverer;
 import edu.wpi.first.toolchain.ToolchainExtension;
+import jaci.gradle.PathUtils;
 import jaci.gradle.deploy.artifact.NativeArtifact;
 import jaci.gradle.deploy.context.DeployContext;
 import jaci.gradle.deploy.sessions.IPSessionController;
@@ -30,7 +31,7 @@ public class Ev3NativeArtifact extends NativeArtifact {
     public Ev3NativeArtifact(String name, Project project) {
         super(name, project);
 
-        setTargetPlatform("linuxev3");
+        setTargetPlatform(Ev3Plugin.platform);
 
         setBuildType("<<GR_AUTO>>");
 
@@ -114,13 +115,17 @@ public class Ev3NativeArtifact extends NativeArtifact {
         // }
         boolean isWin = OperatingSystem.current().isWindows();
 
-        String filebasename = getName() + " " + ctx.getDeployLocation().getTarget().getName();//"${name}_${ctx.deployLocation.target.name}"
+        String filebasename = getName() + "_" + ctx.getDeployLocation().getTarget().getName();//"${name}_${ctx.deployLocation.target.name}"
         File projectBuildDir = getProject().getBuildDir();
         File conffile = new File(projectBuildDir, "debug/" + filebasename + ".debugconfig");
         File gdbfile = new File(projectBuildDir, "debug/" + filebasename + ".gdbcommands");
         File cmdfile = new File(projectBuildDir, "debug/" + filebasename + (isWin ? ".bat" : ""));
 
         if (getDebug()) {
+            String fname = getFilename();
+            String binFile = PathUtils.combine(ctx.getWorkingDir(), fname != null ? fname : getFile().get().getName());
+            String rCmd = "nohup gdbserver 1.1.1.1:" + getDebugPort() + " \"" + binFile + "\"" + String.join(" ", getArguments()) + " 1>/dev/null 2>/dev/null &";
+            ctx.execute("echo \'" + rCmd + "\' > /home/robot/robotCommand");
             conffile.getParentFile().mkdirs();
 
             ctx.getLogger().withLock(new LoggerClosureWrapper((logger) -> {

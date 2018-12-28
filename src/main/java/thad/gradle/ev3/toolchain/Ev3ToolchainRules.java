@@ -7,6 +7,7 @@ import org.gradle.nativeplatform.platform.NativePlatform;
 import org.gradle.platform.base.PlatformContainer;
 
 import edu.wpi.first.toolchain.ToolchainExtension;
+import thad.gradle.ev3.Ev3Plugin;
 
 public class Ev3ToolchainRules extends RuleSource {
 
@@ -15,7 +16,7 @@ public class Ev3ToolchainRules extends RuleSource {
         final ToolchainExtension ext = extContainer.getByType(ToolchainExtension.class);
 
         if (ext.registerPlatforms) {
-            NativePlatform roborio = platforms.maybeCreate("linuxev3", NativePlatform.class);
+            NativePlatform roborio = platforms.maybeCreate(Ev3Plugin.platform, NativePlatform.class);
             roborio.architecture("arm");
             roborio.operatingSystem("linux");
         }
