@@ -12,7 +12,7 @@ public class Ev3 extends RemoteTarget {
     this.setDirectory("/home/robot");
     this.setMaxChannels(4);
     this.setTimeout(7);
-    this.setAddresses("192.168.137.3");
+    this.setAddresses("10.42.0.3");
   }
 
   public void setAddresses(String... addresses) {
@@ -34,7 +34,7 @@ public class Ev3 extends RemoteTarget {
 
   @Override
   public String toString() {
-      return "RoboRIO[" + this.getName()  + "]";
+      return "Ev3[" + this.getName()  + "]";
   }
 
 

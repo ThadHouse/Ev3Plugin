@@ -16,9 +16,9 @@ public class Ev3ToolchainRules extends RuleSource {
         final ToolchainExtension ext = extContainer.getByType(ToolchainExtension.class);
 
         if (ext.registerPlatforms) {
-            NativePlatform roborio = platforms.maybeCreate(Ev3Plugin.platform, NativePlatform.class);
-            roborio.architecture("arm");
-            roborio.operatingSystem("linux");
+            NativePlatform ev3 = platforms.maybeCreate(Ev3Plugin.platform, NativePlatform.class);
+            ev3.architecture("arm");
+            ev3.operatingSystem("linux");
         }
     }
 }
